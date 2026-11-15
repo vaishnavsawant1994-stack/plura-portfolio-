@@ -1,0 +1,12 @@
+import {readFile,stat} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const required=['index.html','404.html','styles.css','script.js','api/contact.js','vercel.json','assets/favicon.svg'];
+for(const path of required) assert.ok((await stat(path)).size>10,`${path} missing`);
+const html=await readFile('index.html','utf8');
+for(const id of ['main','services','works','pricing','contact','faq','contact-form']) assert.match(html,new RegExp(`id="${id}"`),`Missing ${id}`);
+for(const name of ['Branding','UI.UX','Framer Development','Massui','AltAll','Kalo','Tano']) assert.ok(html.includes(name),`Missing ${name}`);
+for(const href of html.matchAll(/href="#([^\"]+)"/g)) assert.ok(html.includes(`id="${href[1]}"`),`Broken anchor ${href[1]}`);
+execFileSync(process.execPath,['--check','script.js']);execFileSync(process.execPath,['--check','api/contact.js']);
+JSON.parse(await readFile('vercel.json','utf8'));
+console.log('PASS: files, anchors, required sections, JavaScript syntax and Vercel JSON');
