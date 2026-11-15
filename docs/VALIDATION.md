@@ -21,13 +21,14 @@ Date: 2026-11-16. This file captures evidence, not claims of complete reference 
 
 ## D — Functional coverage
 
-- Planned checks: anchors, menu, FAQ, theme, plan selection, contact success/failure, error route, keyboard focus.
+- **Executed successfully (Node.js 22):** structure, anchors, labeled controls, unique IDs, accessibility attributes, Git/Vercel configuration syntax, API method validation, invalid input rejection, no-configuration failure, simulated provider acceptance, simulated provider failure.
+- **Not executed:** real browser menu, FAQ, theme, plan selection, contact network, keyboard focus, and visual tests (browser navigation blocked by environment policy).
 - Contact form remains dependent on a configured Resend account.
 
 ## E — Responsive testing
 
-- Test widths: 320, 375, 430, 768, 1024, 1440, 1920, 2560 px.
-- Record actual tested browser and outcomes in this document after running tests.
+- Intended widths: 320, 375, 430, 768, 1024, 1440, 1920, 2560 px.
+- **Blocked:** Chromium 144 / Playwright navigation to `http://127.0.0.1:4173`, `file:///.../index.html`, and a `data:` URL returned `ERR_BLOCKED_BY_ADMINISTRATOR`. All browser viewport results must remain unverified.
 
 ## F — Performance
 
@@ -35,14 +36,20 @@ Date: 2026-11-16. This file captures evidence, not claims of complete reference 
 
 ## G — Technical validation
 
-- Run `npm run check` and browser tests; append outcome, browser version and failures.
+- Local `npm run check`: **PASS**.
+- Local `npm test`: **PASS**, all semantic and mocked API tests.
+- Chromium browser tests: **BLOCKED by administrator policy**.
+- GitHub Actions workflow installed; its run result requires separate verification.
 
 ## H — Deployment
 
 - Target repository: https://github.com/vaishnavsawant1994-stack/plura-portfolio-
 - Target branch: `main`
 - Target platform: Vercel
-- Record commit SHA, deployment id/URL and verification here after checking.
+- GitHub main implementation commit verified: `72b84c58576d658592660a49ef7e9a40322f6221`; subsequent hardening commits may supersede it.
+- Vercel Git-project creation **FAILED**: connected TEAM VS returned `403 forbidden` (no permission to create project).
+- Vercel projects matching `plura` under TEAM VS: **0**.
+- Vercel CLI: unavailable in execution environment; no live deployment URL was created.
 
 ## I — Pending issues
 
@@ -51,6 +58,7 @@ Date: 2026-11-16. This file captures evidence, not claims of complete reference 
 3. Resend contact provider must be configured.
 4. Browser accessibility and cross-browser audits needed.
 5. Original 404 presentation unknown.
+6. Vercel project creation permission is denied under the connected TEAM VS account.
 
 ## J — Verdict
 

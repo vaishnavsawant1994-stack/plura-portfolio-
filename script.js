@@ -73,7 +73,7 @@
   if ('IntersectionObserver' in window) {
     const active = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) {
-        nav?.querySelectorAll('a').forEach(a => a.toggleAttribute('aria-current', a.hash === `#${entry.target.id}`));
+        nav?.querySelectorAll('a').forEach(a => { if (a.hash === `#${entry.target.id}`) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
       }
     }, { rootMargin:'-28% 0px -55% 0px' });
     sectionIds.forEach(id => { const el = document.getElementById(id); if (el) active.observe(el); });
